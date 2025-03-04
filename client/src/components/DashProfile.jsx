@@ -101,9 +101,6 @@ export default function DashProfile() {
     e.preventDefault();
     setUpdateUserError(null);
     setUpdateUserSuccess(null);
-    
-    console.log("User Token:", currentUser?.token);
-
     if (Object.keys(formData).length === 0) {
       setUpdateUserError('No changes made');
       return;
@@ -114,12 +111,10 @@ export default function DashProfile() {
     }
     try {
       dispatch(updateStart());
-
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${currentUser?.token}`
         },
         body: JSON.stringify(formData),
       });
@@ -308,3 +303,4 @@ export default function DashProfile() {
     </div>
   );
 }
+
